@@ -3,4 +3,7 @@ beautifulsoup4
 fastapi
 uvicorn
 fpdf
+<<<<<<< HEAD
 aiofiles
+=======
+>>>>>>> 4f26e73ccf843b81ba0a9bbe292a6c3b627bb5f7

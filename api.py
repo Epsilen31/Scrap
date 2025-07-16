@@ -1,10 +1,8 @@
 from fastapi import FastAPI, UploadFile, File
 import shutil
 import os
-from scraper import download_webpage, store_content
 import aiofiles
-
-SCRAP_DIR = "scrapped"
+from scraper import download_webpage, store_content, SCRAP_DIR
 
 app = FastAPI(title="Web and File Scraper")
 
@@ -17,11 +15,10 @@ async def scrape_url(url: str):
 
 @app.post("/scrape/file")
 async def scrape_file(file: UploadFile = File(...)):
-    os.makedirs(SCRAP_DIR, exist_ok=True)
     dest_path = os.path.join(SCRAP_DIR, file.filename)
     async with aiofiles.open(dest_path, "wb") as f:
-        await f.write(await file.read())
-
+        content = await file.read()
+        await f.write(content)
     async with aiofiles.open(dest_path, "r", encoding="utf-8", errors="ignore") as f_in:
         content = await f_in.read()
     base_name = os.path.splitext(file.filename)[0]
