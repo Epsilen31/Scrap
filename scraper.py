@@ -46,7 +46,9 @@ def main():
     parser = argparse.ArgumentParser(description="Simple web and file scraper")
     parser.add_argument("--url", help="URL of the web page to scrape")
     parser.add_argument("--file", help="Local file path to display")
-    parser.add_argument("--output", default="output", help="Directory to save scraped data")
+    parser.add_argument(
+        "--output", default="output", help="Directory to save scraped data"
+    )
     args = parser.parse_args()
 
     if args.url:
